@@ -1,0 +1,23 @@
+{
+  "auth" : "cpan:TITSUKI",
+  "authors" : [
+    "Itsuki Toyota"
+  ],
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "blah blah blah",
+  "license" : "Artistic-2.0",
+  "name" : "Algorithm::ZhangShasha",
+  "perl" : "6.c",
+  "provides" : {
+    "Algorithm::ZhangShasha" : "lib/Algorithm/ZhangShasha.pm6",
+    "Algorithm::ZhangShasha::Helpable" : "lib/Algorithm/ZhangShasha/Helpable.pm6",
+    "Algorithm::ZhangShasha::Node" : "lib/Algorithm/ZhangShasha/Node.pm6",
+    "Algorithm::ZhangShasha::Tree" : "lib/Algorithm/ZhangShasha/Tree.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "https://github.com/titsuki/raku-Algorithm-ZhangShasha.git",
+  "tags" : [ ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}
