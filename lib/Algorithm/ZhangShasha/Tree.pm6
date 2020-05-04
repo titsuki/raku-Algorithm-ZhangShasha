@@ -7,6 +7,7 @@ has Int $.size;
 has @.td;
 has @.ops;
 has @.children;
+has @!lm-chache;
 has $!count;
 has $!helper;
 
@@ -21,11 +22,12 @@ method get-node(Int $idx) {
 }
 
 method get-left-most-node($idx --> Int) {
+    return @!lm-chache[$idx] if @!lm-chache[$idx]:exists;
     my $current = $idx;
     while @!children[$current] > 0 {
-	$current = @!children[$current].clone.shift;
+	$current = @!children[$current].head;
     }
-    $current;
+    @!lm-chache[$idx] = $current;
 }
 
 method traverse2(NodeT $parent --> Int) {
