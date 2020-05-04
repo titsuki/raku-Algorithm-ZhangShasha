@@ -52,7 +52,7 @@ subtest "Test Algorithm::ZhangShasha::Node" => sub {
     is $tree2.lr-keyroots, (2,5,6);
     is $tree1.tree-distance($tree2).key, 2;
     is $tree1.td, $((0,1,2,3,1,5), (1,0,2,3,1,5), (2,1,2,2,2,4), (3,3,1,2,4,4), (1,1,3,4,0,5), (5,5,3,3,5,2)), "The tree distance table should be same as FIG. 8 in the paper";
-
+$*ERR.say: $tree1.ops[5;5];
     my enum OPS <DELETE INSERT REPLACE KEEP>;
     is $tree1.ops[5;5].map(*.<op>).grep(KEEP).elems, 5;
     is $tree1.ops[5;5].map(*.<op>).grep(DELETE).elems, 1;

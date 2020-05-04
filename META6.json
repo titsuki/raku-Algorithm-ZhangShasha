@@ -5,7 +5,7 @@
   ],
   "build-depends" : [ ],
   "depends" : [ ],
-  "description" : "blah blah blah",
+  "description" : "Tree edit distance between trees",
   "license" : "Artistic-2.0",
   "name" : "Algorithm::ZhangShasha",
   "perl" : "6.c",
