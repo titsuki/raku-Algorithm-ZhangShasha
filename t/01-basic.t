@@ -84,6 +84,8 @@ subtest "Test DOM::Tiny" => sub {
     my Algorithm::ZhangShasha::Tree[DOM::Tiny] $tree2 .= new(:root($dom2.root[0]), :helper(DOMHelper.new));
     is $tree1.size, 3;
     is $tree2.size, 4;
+    is $tree1.lr-keyroots, (2,3);
+    is $tree2.lr-keyroots, (3,4);
     is $tree1.tree-distance($tree2).key, 1;
 }
 
