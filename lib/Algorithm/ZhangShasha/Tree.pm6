@@ -1,4 +1,5 @@
 use v6.c;
+use Algorithm::ZhangShasha::Helpable;
 unit role Algorithm::ZhangShasha::Tree:ver<0.0.1>:auth<cpan:TITSUKI>[::NodeT];
 
 has NodeT $.root;
@@ -11,7 +12,7 @@ has @!lm-chache;
 has $!count;
 has $!helper;
 
-submethod BUILD(NodeT :$!root!, :$!helper!) {
+submethod BUILD(NodeT :$!root!, Algorithm::ZhangShasha::Helpable :$!helper!) {
     $!size = self.traverse2($!root);
     $!count = 1;
     self.traverse($!root);
