@@ -91,13 +91,15 @@ method forest-distance(Int $i, Int $j, Algorithm::ZhangShasha::Tree $another) {
     for $li..$i -> $i1 {
         my $idx = $i1 - $li + 1;
         @fd[$idx;0] = @fd[$idx-1;0] + $!helper.delete-cost(self.get-node($i1));
-	@local-ops[$idx;0] = @local-ops[$idx-1;0].clone.append: %(op => DELETE, pair => Pair.new($i1,0)).item;
+	my %op = %(op => DELETE, pair => Pair.new($i1,0));
+	@local-ops[$idx;0] = @(|@local-ops[$idx-1;0], %op.item);
     }
 
     for $lj..$j -> $j1 {
         my $idx = $j1 - $lj + 1;
         @fd[0;$idx] = @fd[0;$idx-1] + $!helper.insert-cost($another.get-node($j1));
-	@local-ops[0;$idx] = @local-ops[0;$idx-1].clone.append: %(op => INSERT, pair => Pair.new(0,$j1)).item;
+	my %op = %(op => INSERT, pair => Pair.new(0,$j1));
+	@local-ops[0;$idx] = @(|@local-ops[0;$idx-1], %op.item);
     }
 
     for $li .. $i -> $i1 {
@@ -117,20 +119,20 @@ method forest-distance(Int $i, Int $j, Algorithm::ZhangShasha::Tree $another) {
 		given OPS($min.key) {
 		    when DELETE {
 			my %op = %(op => OPS($min.key), pair => Pair.new($i1,$j1));
-			@local-ops[$fd-i;$fd-j] = (@local-ops[$fd-i - 1;$fd-j] // []) .clone.append: %op.item;
+			@local-ops[$fd-i;$fd-j] = @(|(@local-ops[$fd-i - 1;$fd-j] // []),%op.item);
 		    }
 		    when INSERT {
 			my %op = %(op =>OPS($min.key), pair => Pair.new($i1,$j1));
-			@local-ops[$fd-i;$fd-j] = (@local-ops[$fd-i;$fd-j - 1] // []) .clone.append: %op.item;
+			@local-ops[$fd-i;$fd-j] = @(|(@local-ops[$fd-i;$fd-j - 1] // []),%op.item);
 		    }
 		    default {
 			if @fd[$fd-i - 1;$fd-j - 1] - @fd[$fd-i;$fd-j] == 0 {
 			    # TODO: min never contains KEEP
 			    my %op = %(op => KEEP, pair => Pair.new($i1,$j1));
-			    @local-ops[$fd-i;$fd-j] = (@local-ops[$fd-i - 1;$fd-j - 1] // []) .clone.append: %op.item;
+			    @local-ops[$fd-i;$fd-j] = @(|(@local-ops[$fd-i - 1;$fd-j - 1] // []),%op.item);
 			} else {
 			    my %op = %(op => OPS($min.key), pair => Pair.new($i1,$j1));
-			    @local-ops[$fd-i;$fd-j] = (@local-ops[$fd-i - 1;$fd-j - 1] // []) .clone.append: %op.item;
+			    @local-ops[$fd-i;$fd-j] = @(|(@local-ops[$fd-i - 1;$fd-j - 1] // []),%op.item);
 			}
 		    }
 		}
@@ -146,14 +148,14 @@ method forest-distance(Int $i, Int $j, Algorithm::ZhangShasha::Tree $another) {
 		given OPS($min.key) {
 		    when DELETE {
 			my %op = %(op => OPS($min.key), pair => Pair.new($i1,$j1));
-			@local-ops[$fd-i;$fd-j] = (@local-ops[$fd-i - 1;$fd-j] // []) .clone.append: %op.item;
+			@local-ops[$fd-i;$fd-j] = @(|(@local-ops[$fd-i - 1;$fd-j] // []),%op.item);
 		    }
 		    when INSERT {
 			my %op = %(op => OPS($min.key), pair => Pair.new($i1,$j1));
-			@local-ops[$fd-i;$fd-j] = (@local-ops[$fd-i;$fd-j - 1] // []) .clone.append: %op.item;
+			@local-ops[$fd-i;$fd-j] = @(|(@local-ops[$fd-i;$fd-j - 1] // []),%op.item);
 		    }
 		    default {
-			@local-ops[$fd-i;$fd-j] = (@local-ops[$li1-$li;$lj1-$lj] // []) .clone.append: @!ops[$i1-1;$j1-1].flat;
+			@local-ops[$fd-i;$fd-j] = @(|(@local-ops[$li1-$li;$lj1-$lj] // []),|@!ops[$i1-1;$j1-1]);
 		    }
 		}
             }
