@@ -1,6 +1,6 @@
 use v6.c;
 use Algorithm::ZhangShasha::Helpable;
-unit role Algorithm::ZhangShasha::Tree:ver<0.0.2>:auth<cpan:TITSUKI>[::NodeT];
+unit role Algorithm::ZhangShasha::Tree:ver<0.0.3>:auth<cpan:TITSUKI>[::NodeT];
 
 has NodeT $.root;
 has @!idx2node;

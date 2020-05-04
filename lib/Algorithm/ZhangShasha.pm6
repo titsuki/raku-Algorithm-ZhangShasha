@@ -3,7 +3,7 @@ use Algorithm::ZhangShasha::Tree;
 use Algorithm::ZhangShasha::Node;
 use Algorithm::ZhangShasha::Helpable;
 
-unit class Algorithm::ZhangShasha:ver<0.0.2>:auth<cpan:TITSUKI>;
+unit class Algorithm::ZhangShasha:ver<0.0.3>:auth<cpan:TITSUKI>;
 
 =begin pod
 
