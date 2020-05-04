@@ -18,6 +18,8 @@
   "resources" : [ ],
   "source-url" : "https://github.com/titsuki/raku-Algorithm-ZhangShasha.git",
   "tags" : [ ],
-  "test-depends" : [ ],
+  "test-depends" : [
+    "DOM::Tiny"
+  ],
   "version" : "0.0.2"
 }
